@@ -1,0 +1,12 @@
+relationship 632d1d19-692c-1470-d5d1-de98884cebe3
+	fromColumn: year_month.transaction_date
+	toColumn: gold_daily_sales.transaction_date
+
+relationship c736caf8-d49a-935b-bf7f-dc8e0ab9be64
+	fromColumn: gold_category_sales.product_category
+	toColumn: gold_category_summary.category
+
+relationship 07650d0e-e88e-6a86-0aa6-73ddd528fd21
+	fromColumn: year_month.transaction_date
+	toColumn: gold_category_sales.transaction_date
+

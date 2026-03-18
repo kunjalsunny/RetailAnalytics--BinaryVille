@@ -1,0 +1,50 @@
+table year_month
+	lineageTag: 2feae262-f99d-42f6-8c70-a94b40f2b07c
+	sourceLineageTag: [dbo].[year_month]
+
+	column transaction_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a766d3c3-f794-4e1d-a5d1-892c1584433d
+		sourceLineageTag: transaction_date
+		summarizeBy: none
+		sourceColumn: transaction_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month_of_the_year
+		dataType: int64
+		formatString: 0
+		lineageTag: 7def36c7-2d1e-4389-8ad2-0ce265780d67
+		sourceLineageTag: Month_of_the_year
+		summarizeBy: sum
+		sourceColumn: Month_of_the_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year_Name
+		dataType: int64
+		formatString: 0
+		lineageTag: 3538aeff-2388-46fa-90e3-af2cf78ed4c4
+		sourceLineageTag: Year_Name
+		summarizeBy: sum
+		sourceColumn: Year_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_name
+		dataType: string
+		lineageTag: 68cc6465-626d-468c-9e68-641b16163dbe
+		sourceLineageTag: month_name
+		summarizeBy: none
+		sourceColumn: month_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition year_month = entity
+		mode: directLake
+		source
+			entityName: year_month
+			schemaName: dbo
+			expressionSource: 'DirectLake - Gold_Layer'
+
