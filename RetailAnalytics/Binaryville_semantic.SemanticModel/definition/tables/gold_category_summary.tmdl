@@ -1,0 +1,41 @@
+table gold_category_summary
+	lineageTag: 67611409-4a22-4497-a4f2-34acb02f8ee1
+	sourceLineageTag: [dbo].[gold_category_summary]
+
+	column category
+		dataType: string
+		lineageTag: c98a12ca-6e8a-4ce6-ac5a-aa1f2568d5fd
+		sourceLineageTag: category
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_orders
+		dataType: int64
+		formatString: 0
+		lineageTag: 70f632b5-28c0-4c0d-945a-c389d9f0effd
+		sourceLineageTag: total_orders
+		summarizeBy: none
+		sourceColumn: total_orders
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_total_sales
+		dataType: double
+		lineageTag: 2c4ae286-0401-4786-a261-b2e465b73443
+		sourceLineageTag: category_total_sales
+		summarizeBy: none
+		sourceColumn: category_total_sales
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition gold_category_summary = entity
+		mode: directLake
+		source
+			entityName: gold_category_summary
+			schemaName: dbo
+			expressionSource: 'DirectLake - Gold_Layer'
+

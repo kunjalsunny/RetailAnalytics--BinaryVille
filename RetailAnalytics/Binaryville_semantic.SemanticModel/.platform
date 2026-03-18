@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Binaryville_semantic"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "cf39d5cf-f6ef-a0e7-45ca-61ee27cb7b91"
+  }
+}
