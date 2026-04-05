@@ -7,27 +7,36 @@ class InventoryOptimizer:
         self.bounds = bounds
 
     def optimize(self):
-        # Use linear programming to minimize inventory costs
-        res = linprog(self.costs, A_ub=self.constraints['A'], b_ub=self.constraints['b'], bounds=self.bounds)
-        if res.success:
-            return res.x
-        else:
-            raise ValueError('Optimization failed: ' + res.message)
+        res = linprog(
+            c=self.costs,
+            A_ub=self.constraints['A'],
+            b_ub=self.constraints['b'],
+            bounds=self.bounds,
+            method="highs"
+        )
 
-# Example usage
+        if res.success:
+            return res.x, res.fun
+        else:
+            raise ValueError("Optimization failed: " + res.message)
+
 if __name__ == '__main__':
-    # Costs associated with each inventory item
-    costs = [1.5, 2.0, 2.5]  # Example cost per item
-    
-    # Constraints: A_ub * x <= b_ub
+    costs = [1.5, 2.0, 2.5]
+
     constraints = {
-        'A': [[1, 1, 1], [2, 1, 0], [0, 2, 1]],  # Coefficients for inequality
-        'b': [100, 80, 60]  # Limits for inequalities
+        'A': [
+            [1, 1, 1],
+            [2, 1, 0],
+            [0, 2, 1]
+        ],
+        'b': [100, 80, 60]
     }
-    
-    # Bounds for each inventory item (0 <= x_i <= max limits)
-    bounds = [(0, None), (0, None), (0, None)]  # No upper limit
-    
+
+    # Minimum required stock added
+    bounds = [(10, None), (15, None), (20, None)]
+
     optimizer = InventoryOptimizer(costs, constraints, bounds)
-    result = optimizer.optimize()
-    print('Optimized inventory levels:', result)
+    result, min_cost = optimizer.optimize()
+
+    print("Optimized inventory levels:", result)
+    print("Minimum total cost:", min_cost)
